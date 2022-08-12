@@ -1,15 +1,17 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
+//import sun from '../images/sun.png'
 
 const Search = () => {
     const [citySearch, setCitySearch] = useState('Rennes');
     const [codeInsee, setCodeInsee] = useState('35238');
     const [weather, setWeather] = useState(null);
+    const d = new Date();
     useEffect(() => {
         
         axios.get('https://api.meteo-concept.com/api/forecast/daily/0/periods/?token=9b01db3accf07d2a4792726c45ffe29b9a19b6e1351743562e4ef1ef868d90e3&insee='+codeInsee,
         )
-        .then(res =>setWeather(res))
+        .then((res) =>{setWeather(res);console.log(res)})
         .catch(err =>console.log(err))
       },[codeInsee]);
     useEffect( () =>{
@@ -22,6 +24,8 @@ const Search = () => {
     return (
         <div className='search'>
             <input onChange={(e)=> setCitySearch(e.target.value)} type='text'></input>
+            <p>{d.toLocaleDateString()}</p>
+            <p className='name'>{weather==null?'Rennes':weather.data.city.name}</p>
             <div className='result'>
                 <div className='nuit'>
                     <h3>nuit:</h3>
@@ -32,7 +36,8 @@ const Search = () => {
                     <p>{weather==null?0:weather.data.forecast[1].temp2m}</p>
                 </div>
                 <div className='aprem'>
-                <h3>après-midi:</h3>
+                    <h3>après-midi:</h3>
+                    <div className='photo'></div>
                     <p>{weather==null?0:weather.data.forecast[2].temp2m}</p>
                 </div>
                 <div className='soir'>

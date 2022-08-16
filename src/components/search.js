@@ -1,6 +1,8 @@
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
-//import sun from '../images/sun.png'
+import sun from '../images/sun.png';
+import rain from '../images/rain.png';
+import loading from '../images/loading.png';
 
 const Search = () => {
     const [citySearch, setCitySearch] = useState('Rennes');
@@ -21,6 +23,16 @@ const Search = () => {
         .catch(err =>console.log(err))
     },[citySearch]);
     
+    const DayImages = () =>{
+        switch(weather.data.forecast[2].weather){
+            case 40: return rain;
+                        break;
+            case 210: return rain;
+                        break;
+            default : return sun; 
+                    break;           
+        }
+    }
     return (
         <div className='search'>
             <input onChange={(e)=> setCitySearch(e.target.value)} type='text'></input>
@@ -37,7 +49,7 @@ const Search = () => {
                 </div>
                 <div className='aprem'>
                     <h3>après-midi:</h3>
-                    <div className='photo'></div>
+                    <img className='photo' src={weather==null?loading:DayImages()}></img>
                     <p>{weather==null?0:weather.data.forecast[2].temp2m}</p>
                 </div>
                 <div className='soir'>

@@ -31,8 +31,8 @@ const Search = () => {
         .catch(err =>console.log(err))
     },[citySearch]);
     
-    const DayImages = () =>{
-        switch(weather.data.forecast[2].weather){
+    const DayImages = (n) =>{
+        switch(weather.data.forecast[n].weather){
             case 0: return sun;
                     break;
             case 1:
@@ -142,19 +142,22 @@ const Search = () => {
             <div className='result'>
                 <div className='nuit'>
                     <h3>nuit:</h3>
+                    <img className='photo' src={weather==null?loading:DayImages(2)}></img>
                     <p>{weather==null?0:weather.data.forecast[0].temp2m}</p>
                 </div>
                 <div className='matin'>
-                <h3>matin:</h3>
+                    <h3>matin:</h3>
+                    <img className='photo' src={weather==null?loading:DayImages(1)}></img>
                     <p>{weather==null?0:weather.data.forecast[1].temp2m}</p>
                 </div>
                 <div className='aprem'>
                     <h3>après-midi:</h3>
-                    <img className='photo' src={weather==null?loading:DayImages()}></img>
+                    <img className='photo' src={weather==null?loading:DayImages(2)}></img>
                     <p>{weather==null?0:weather.data.forecast[2].temp2m}</p>
                 </div>
                 <div className='soir'>
-                <h3>soir:</h3>
+                    <h3>soir:</h3>
+                    <img className='photo' src={weather==null?loading:DayImages(3)}></img>
                     <p>{weather==null?0:weather.data.forecast[3].temp2m}</p>
                 </div>
             </div>

@@ -11,6 +11,11 @@ import snowlittle from '../images/snow_little.png';
 import snowbig from '../images/snow_big.png';
 import orage from '../images/orage.png';
 import oragebig from '../images/big_orage.png';
+import night from '../images/night.png';
+import nightrain from '../images/night_rain.png';
+import nightwind from '../images/night_wind.png';
+import nightsnow from '../images/night_snow.png';
+import nightcloud from '../images/night_cloud.png';
 
 const Search = () => {
     const [citySearch, setCitySearch] = useState('Rennes');
@@ -134,6 +139,109 @@ const Search = () => {
                       break;           
         }
     }
+    const NightImages = (n) =>{
+        switch(weather.data.forecast[n].weather){
+            case 0: return night;
+                    break;
+            case 1:
+            case 2: return nightcloud;
+                    break;
+            case 3:
+            case 4: return nightcloud;
+                    break;
+            case 5: return nightcloud;
+                    break;
+            case 6:
+            case 7: return nightwind;
+                    break;
+            case 10:
+            case 11:
+            case 12:        
+            case 40:  
+            case 41: 
+            case 42: 
+            case 43: 
+            case 44: 
+            case 45: 
+            case 46: 
+            case 47: 
+            case 48:
+            case 210: 
+            case 211:
+            case 212: return nightrain;
+                      break;
+            case 13:
+            case 14:        
+            case 15: 
+            case 16: 
+            case 20:
+            case 30:
+            case 61:
+            case 63:
+            case 64:
+            case 220:
+            case 221: return nightsnow;
+                      break;
+            case 21: 
+            case 22:
+            case 31:
+            case 32:
+            case 62:
+            case 65:
+            case 26: 
+            case 67:
+            case 68:
+            case 70:
+            case 71: 
+            case 72:
+            case 73:
+            case 74:
+            case 75:
+            case 76:
+            case 77: 
+            case 78:
+            case 222:
+            case 230:
+            case 231:
+            case 232:
+            case 235:return nightsnow;
+                    break;
+            case 100:
+            case 101:
+            case 103:        
+            case 104:  
+            case 106: 
+            case 120: 
+            case 121: 
+            case 122: 
+            case 123: 
+            case 124: 
+            case 125: 
+            case 126:
+            case 140: 
+            case 141: 
+            case 142:  return nightrain;
+                      break;
+            case 102:
+            case 105:
+            case 107:        
+            case 108:  
+            case 127: 
+            case 128: 
+            case 130: 
+            case 131: 
+            case 132: 
+            case 133: 
+            case 134: 
+            case 135: 
+            case 136: 
+            case 137: 
+            case 138: return nightrain;
+                      break;
+            default : return night; 
+                      break;           
+        }
+    }
     return (
         <div className='search'>
             <input onChange={(e)=> setCitySearch(e.target.value)} type='text'></input>
@@ -142,22 +250,22 @@ const Search = () => {
             <div className='result'>
                 <div className='nuit'>
                     <h3>nuit:</h3>
-                    <img className='photo' src={weather==null?loading:DayImages(2)}></img>
+                    <img className='photo' alt='weather picture' src={weather==null?loading:NightImages(0)}></img>
                     <p>{weather==null?0:weather.data.forecast[0].temp2m}</p>
                 </div>
                 <div className='matin'>
                     <h3>matin:</h3>
-                    <img className='photo' src={weather==null?loading:DayImages(1)}></img>
+                    <img className='photo' alt='weather picture' src={weather==null?loading:DayImages(1)}></img>
                     <p>{weather==null?0:weather.data.forecast[1].temp2m}</p>
                 </div>
                 <div className='aprem'>
                     <h3>après-midi:</h3>
-                    <img className='photo' src={weather==null?loading:DayImages(2)}></img>
+                    <img className='photo' alt='weather picture' src={weather==null?loading:DayImages(2)}></img>
                     <p>{weather==null?0:weather.data.forecast[2].temp2m}</p>
                 </div>
                 <div className='soir'>
                     <h3>soir:</h3>
-                    <img className='photo' src={weather==null?loading:DayImages(3)}></img>
+                    <img className='photo' alt='weather picture' src={weather==null?loading:DayImages(3)}></img>
                     <p>{weather==null?0:weather.data.forecast[3].temp2m}</p>
                 </div>
             </div>
